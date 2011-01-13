@@ -2,7 +2,7 @@ class CountOneDrumUsers < Scout::Plugin
   OPTIONS=<<-EOS
     prefs_file:
       name: Target Preferences File
-      notes: The full path to the preferences file is required
+      default: server/configuration/.settings/org.eclipse.core.runtime.preferences.OSGiPreferences.3.prefs
   EOS
     
   def build_report
