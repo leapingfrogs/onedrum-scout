@@ -12,7 +12,7 @@ class ExtractBulkStats < Scout::Plugin
     total_files = nil
     collaborative_files = nil
 
-    return unless File.exists? data_metrics_log_path
+    if(!File.exists?(data_metrics_log_path)) return 
 
     lines = File.readlines(data_metrics_log_path)
 
