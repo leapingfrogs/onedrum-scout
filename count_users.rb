@@ -10,7 +10,7 @@ class CountOneDrumUsers < Scout::Plugin
   end
 
   def total_accounts
-    if `grep com.quolos.basicid.username=true server/configuration/.settings/org.eclipse.core.runtime.preferences.OSGiPreferences.3.prefs|wc -l` =~ /(\d+)/
+    if `grep com.quolos.basicid.username=true #{prefs_file} | wc -l` =~ /(\d+)/
       $1.to_i
     else
       error "Attempt to retrieve total accounts failed"       
