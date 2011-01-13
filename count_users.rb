@@ -18,7 +18,7 @@ class CountOneDrumUsers < Scout::Plugin
   end
      
   def active_accounts
-      if `grep com.quolos.basicid.lastUpdated=true #{prefs_file_path} | wc -l` =~ /(\d+)/
+      if `grep com.quolos.basicid.lastLogin=true #{prefs_file_path} | wc -l` =~ /(\d+)/
         $1.to_i
       else
         error "Attempt to retrieve active accounts failed"       
