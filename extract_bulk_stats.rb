@@ -12,7 +12,7 @@ class ExtractBulkStats < Scout::Plugin
     total_files = nil
     collaborative_files = nil
 
-    if(!File.exists?(data_metrics_log_path)) return 
+    return unless (File.exists?(data_metrics_log_path))
 
     lines = File.readlines(data_metrics_log_path)
 
@@ -23,7 +23,7 @@ class ExtractBulkStats < Scout::Plugin
         line = line[line.index(']') + 1, line.length]
         line.strip!
 
-        if (line =~ /^{.*report_type[ ]=[ ]bulk_stats.*}$/) then
+        if (line =~ /^[{].*report_type[ ]=[ ]bulk_stats.*[}]$/) then
           total_users = $1.to_i if total_users.nil? && line =~ /total_users[ ]=[ ](\d*)/
           workspaces = $1.to_i if workspaces.nil? && line =~ /workspaces[ ]=[ ](\d*)/
           chat_messages = $1.to_i if  chat_messages.nil? && line =~ /chat_messages[ ]=[ ](\d*)/
