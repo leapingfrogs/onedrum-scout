@@ -21,7 +21,7 @@ class ExtractUsersOnline < Scout::Plugin
         line = line[line.index(']') + 1, line.length]
         line.strip!
 
-        if (line =~ /^[{].*report_type[ ]=[ ]users_online.*[}]$/) then
+        if (line =~ /^[{].*report_type[ ]=[ ][']users_online.*[}]$/) then
           users_online = $1.to_i if total_users.nil? && line =~ /users_online[ ]=[ ](\d*)/
         end
       end
