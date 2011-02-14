@@ -6,7 +6,7 @@ class ExtractUsersOnline < Scout::Plugin
   EOS
 
   def build_report
-    users_online = nil
+    users_online_24_hours = nil
 
     if(!File.exists?(data_metrics_log_path)) then
       return
@@ -22,16 +22,16 @@ class ExtractUsersOnline < Scout::Plugin
         line.strip!
 
         if (line =~ /^[{].*report_type[ ]=[ ][']users_online_past_24_hours.*[}]$/) then
-          users_online = $1.to_i if users_online.nil? && line =~ /count[ ]=[ ](\d*)/
+          users_online_24_hours = $1.to_i if users_online_24_hours.nil? && line =~ /count[ ]=[ ](\d*)/
         end
       end
 
-      break if users_online
+      break if users_online_24_hours
     end
 
-    users_online ||= 0
+    users_online_24_hours ||= 0
 
-    report :users_online => users_online
+    report :users_online_24_hours => users_online_24_hours
   end
 
   def data_metrics_log_path
